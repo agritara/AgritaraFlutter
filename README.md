@@ -8,7 +8,11 @@ Fauzan Firzandy Khifzan (2106702756)
 
 2. Deskripsi Aplikasi 
   Nama : Agritara
-  Fungsi : Untuk penyebaran bahan pokok antar daerah
+Cerita Aplikasi : 
+Melihat banyaknya permasalahan pada produksi bahan pokok di Indonesia membuat harga beberapa bahan pokok menjadi lebih mahal. Pada suatu daerah mungkin ada yang berhasil membuat panen bahan pokok dan ada juga yang terjadi gagal panen. Oleh karena itu, kami membuat suatu website bernama Agritara untuk menyimpan informasi hasil panen bahan pokok dari berbagai daerah di Indonesia yang telah diinput oleh petani masing-masing daerah mengenai kuantitas bahan-bahan pokok yang berhasil panen. Pemerintah suatu daerah yang kekurangan bahan pokok tertentu dapat melakukan request ke pemerintah daerah lain yang berhasil memproduksi bahan pokok dengan jumlah cukup banyak dan tidak kekurangan bahan pokok tersebut. Dengan hadirnya aplikasi ini, diharapkan bahwa harga bahan pokok pada setiap daerah di Indonesia dapat stabil pada setiap waktu dan kebutuhan masyarakat pada setiap daerah di Indonesia terhadap bahan pokok dapat tercukupi.
+
+Fungsi : Untuk membantu pemerintah dalam pemerataan distribusi bahan pokok di Indonesia
+ 
   Peran User : 
   - Petani : Untuk memberi informasi atas bahan-bahan pokok yang berhasil di produksi dari suatu daerah
   - Pemda : Untuk meminta bahan pokok yang dibutuhkan dari suatu daerah
