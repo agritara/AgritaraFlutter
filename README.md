@@ -26,4 +26,7 @@ Fungsi : Untuk membantu pemerintah dalam pemerataan distribusi bahan pokok di In
   - Input pemerintah (Bintang Pratama)
   
  4. Alur pengintegrasian dengan web service untuk terhubung dengan aplikasi web yang sudah dibuat saat Proyek Tengah Semester
- 
+ - Membuat model class berdasarkan response data yang ingin diambil saat melakukan pemanggilan web service dengan pendefinisian model yang disesuaikan dengan setiap modul yang dibuat oleh masing-masing anggota kelompok.
+- Membuat sebuah API yang dapat mengembalikan response berbentuk JSON. Kemudian implementasikan method GET yang akan menampilkan data dan mengirim input menggunakan method POST agar dapat meng-update data yang baru, serta diintegrasi dengan cara menggunakan konsep async HTTP.
+- Melakukan data fetching dari web service dengan melakukan HTTP GET request serta iterasi data untuk ditampilkan pada aplikasi melalui FutureBuilder. 
+
