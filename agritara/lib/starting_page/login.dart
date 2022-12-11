@@ -168,11 +168,12 @@ class _LoginPageState extends State<LoginPage> {
                               child: Text("Login"),
                               onPressed: (() async {
                                 final response = await request.login(
-                                    "https://agritara.pythonanywhere.com/registerLogin/login_flutter/",
+                                    "https://agritara.pythonanywhere.com/registerLogin/login/",
                                     {
                                       'username': username,
                                       'password': password1,
                                     });
+                                print(response['status']);
                                 if (response['status'] == 'success') {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
