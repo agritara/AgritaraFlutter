@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:agritara/page/login.dart';
-import 'package:agritara/page/halaman_petani.dart';
+import 'package:agritara/main.dart';
 import 'package:agritara/page/halaman_pemerintah.dart';
-
-void main() {
-  runApp(const MyApp());
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Halaman Utama',
+      title: 'Halaman Input Pemerintah',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -22,16 +17,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HalamanUtama extends StatefulWidget {
-  const HalamanUtama({super.key});
+class HalamanInputPemerintah extends StatefulWidget {
+  const HalamanInputPemerintah({super.key});
 
-  final String title = 'Halaman Utama';
+  final String title = 'Halaman Input Pemerintah';
 
   @override
-  State<HalamanUtama> createState() => _StateHalamanUtama();
+  State<HalamanInputPemerintah> createState() => _StateHalamanInputPemerintah();
 }
 
-class _StateHalamanUtama extends State<HalamanUtama> {
+class _StateHalamanInputPemerintah extends State<HalamanInputPemerintah> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,30 +37,11 @@ class _StateHalamanUtama extends State<HalamanUtama> {
         child: Column(
           children: [
             ListTile(
-              title: const Text('Halaman Login'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HalamanLogin()),
-                );
-              },
-            ),
-            ListTile(
               title: const Text('Halaman Utama'),
               onTap: () {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HalamanUtama()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Halaman Petani'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const HalamanPetani()),
                 );
               },
             ),
@@ -79,6 +55,16 @@ class _StateHalamanUtama extends State<HalamanUtama> {
                 );
               },
             ),
+            ListTile(
+              title: const Text('Halaman Input Pemerintah'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HalamanInputPemerintah()),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -86,7 +72,7 @@ class _StateHalamanUtama extends State<HalamanUtama> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Text('Ini halaman utama!'),
+            Text('Ini halaman Input Pemerintah!'),
           ],
         ),
       ),

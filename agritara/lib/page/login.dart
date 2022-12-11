@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:agritara/page/login.dart';
-import 'package:agritara/page/halaman_petani.dart';
-import 'package:agritara/page/halaman_pemerintah.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:agritara/main.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Halaman Utama',
+      title: 'Halaman Login',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -22,16 +16,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HalamanUtama extends StatefulWidget {
-  const HalamanUtama({super.key});
+class HalamanLogin extends StatefulWidget {
+  const HalamanLogin({super.key});
 
-  final String title = 'Halaman Utama';
+  final String title = 'Halaman Input Pemerintah';
 
   @override
-  State<HalamanUtama> createState() => _StateHalamanUtama();
+  State<HalamanLogin> createState() => _StateHalamanLogin();
 }
 
-class _StateHalamanUtama extends State<HalamanUtama> {
+class _StateHalamanLogin extends State<HalamanLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,26 +53,6 @@ class _StateHalamanUtama extends State<HalamanUtama> {
                 );
               },
             ),
-            ListTile(
-              title: const Text('Halaman Petani'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const HalamanPetani()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Halaman Pemerintah'),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const HalamanPemerintah()),
-                );
-              },
-            ),
           ],
         ),
       ),
@@ -86,7 +60,7 @@ class _StateHalamanUtama extends State<HalamanUtama> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Text('Ini halaman utama!'),
+            Text('Ini halaman Login!'),
           ],
         ),
       ),
