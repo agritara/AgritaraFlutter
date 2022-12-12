@@ -225,7 +225,7 @@ class _StateHalamanInputPetani extends State<HalamanInputPetani> {
 
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => InputPetaniPage()),
+                            MaterialPageRoute(builder: (context) => HalamanInputPetani()),
                           );
                         }
                       },

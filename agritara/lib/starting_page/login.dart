@@ -2,6 +2,7 @@ import 'package:agritara/starting_page/register.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:agritara/Navbar.dart'
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
