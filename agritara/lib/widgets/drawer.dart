@@ -5,8 +5,7 @@ import 'package:agritara/starting_page/homepage.dart';
 import 'package:agritara/starting_page/login.dart';
 
 import 'package:provider/provider.dart';
-import 'package:agritara/other/cookie_request.dart';
-
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});

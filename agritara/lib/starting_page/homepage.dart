@@ -7,8 +7,8 @@ class HomePage extends StatelessWidget {
   static const routeName = '/home';
 
   // Color themes
-  static const blackColorTheme = Color(0xFF24262A);
-  static const orangeColorTheme = Color(0xFFFEA150);
+  static const greenColorTheme = Color.fromARGB(255, 47, 166, 34);
+  static const orangeColorTheme = Color.fromARGB(255, 214, 134, 64);
 
   @override
   Widget build(BuildContext context) {

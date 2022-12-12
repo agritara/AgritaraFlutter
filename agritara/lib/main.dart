@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:agritara/other/cookie_request.dart';
-
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:agritara/starting_page/homepage.dart';
 import 'package:agritara/starting_page/login.dart';
 import 'package:agritara/starting_page/register.dart';
@@ -39,12 +38,12 @@ class MyApp extends StatelessWidget {
           title: 'AGRITARA',
           theme:
               ThemeData(primarySwatch: MaterialColor(0xFFFEA150, colorTheme)),
-          home: HomePage(),
+          home: LoginPage(),
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
               case HomePage.routeName:
                 return MaterialPageRoute(builder: (_) => const HomePage());
-          
+
               case RegisterPage.routeName:
                 return MaterialPageRoute(builder: (_) => const RegisterPage());
             }

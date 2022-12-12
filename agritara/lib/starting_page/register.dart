@@ -1,7 +1,7 @@
 import 'package:agritara/starting_page/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:agritara/other/cookie_request.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -14,6 +14,47 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
   bool isPasswordVisible = false;
+  String? _pilihPeran;
+  String? _pilihDaerah;
+  List<String> list_pilihPeran = ["Pemda", "Petani"];
+  List<String> list_pilihDaerah = [
+    "Aceh",
+    "Sumatra Utara",
+    "Sumatra Barat",
+    "Riau",
+    "Kepulauan Seribu",
+    "Jambi",
+    "Bengkulu",
+    "Sumatra Selatan",
+    "Kepulauan Bangka Belitung",
+    "Lampung",
+    "Banten",
+    "DKI Jakarta",
+    "Jawa Barat",
+    "Jawa Tengah",
+    "Daerah Istimewa Yogyakarta",
+    "Jawa Timur",
+    "Bali",
+    "Nusa Tenggara Barat",
+    "Nusa Tenggara Timur",
+    "Kalimantan Barat",
+    "Kalimantan Tengah",
+    "Kalimantan Selatan",
+    "Kalimantan Timur",
+    "Kalimantan Utara",
+    "Sulawesi Barat",
+    "Sulawesi Selatan",
+    "Sulawesi Tenggara",
+    "Sulawesi Tengah",
+    "Gorontalo",
+    "Sulawesi Utara",
+    "Maluku Utara",
+    "Maluku",
+    "Papua",
+    "Papua Tengah",
+    "Papua Pegunungan",
+    "Papua Selatan"
+  ];
   void togglePasswordView() {
     setState(() {
       isPasswordVisible = !isPasswordVisible;
@@ -23,6 +64,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String username = "";
   String password1 = "";
   String password2 = "";
+  String peran = "";
+  String daerah = "";
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -31,9 +74,9 @@ class _RegisterPageState extends State<RegisterPage> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.green,
-          Colors.green,
-          Colors.green,
+          Color.fromARGB(255, 86, 202, 111),
+          Color.fromARGB(255, 86, 202, 111),
+          Color.fromARGB(255, 86, 202, 111),
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 169, 98, 72),
+                    color:  Color.fromARGB(255, 216, 200, 154),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
@@ -188,6 +231,38 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                         ),
+                        DropdownButton(
+                          value: _pilihPeran,
+                          hint: const Text("Pilih Peran"),
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: list_pilihPeran.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _pilihPeran = newValue!;
+                            });
+                          },
+                        ),
+                        DropdownButton(
+                          value: _pilihDaerah,
+                          hint: const Text("Pilih Daerah"),
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: list_pilihDaerah.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _pilihDaerah = newValue!;
+                            });
+                          },
+                        ),
                         Container(
                           height: 10,
                         ),
@@ -201,24 +276,26 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: TextButton(
                               child: Text("Buat Akun"),
                               onPressed: (() async {
-                                final response = await request.login(
+                                final response = await request.post(
                                     "https://agritara.pythonanywhere.com/registerLogin/register_flutter/",
                                     {
                                       'username': username,
                                       'password1': password1,
                                       'password2': password2,
+                                      'peran': peran,
+                                      'daerah': daerah,
                                     });
                                 if (response['status'] == 'success') {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
                                     content: Text(
-                                        "Selamat! Akun telah berhasil dibuat"),
+                                        "Akun anda telah berhasil dibuat"),
                                   ));
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(
                                     content: Text(
-                                        "Akun belum terbuat, lengkapi data untuk membuat akun!"),
+                                        "Akun anda belum berhasil terbuat, silahkan isi data kembali secara lengkap!"),
                                   ));
                                 }
                               }),

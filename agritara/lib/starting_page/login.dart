@@ -1,7 +1,7 @@
 import 'package:agritara/starting_page/register.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:agritara/other/cookie_request.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,9 +30,9 @@ class _LoginPageState extends State<LoginPage> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.green,
-          Colors.green,
-          Colors.green,
+          Color.fromARGB(255, 86, 202, 111),
+          Color.fromARGB(255, 86, 202, 111),
+          Color.fromARGB(255, 86, 202, 111),
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 169, 98, 72),
+                    color:  Color.fromARGB(255, 216, 200, 154),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                         bottom:
-                                            BorderSide(color: Colors.grey))),
+                                            BorderSide(color: Colors.black))),
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                     hintText: "Masukkan Username",
@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                         bottom:
-                                            BorderSide(color: Colors.grey))),
+                                            BorderSide(color: Colors.black))),
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                       hintText: "Password",
@@ -164,31 +164,32 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(300),
                                 color: Colors.orange[900]),
                             child: Center(
-                                child: TextButton(
-                              child: Text("Login"),
-                              onPressed: (() async {
-                                final response = await request.login(
-                                    "https://agritara.pythonanywhere.com/registerLogin/login/",
-                                    {
-                                      'username': username,
-                                      'password': password1,
-                                    });
-                                print(response['status']);
-                                if (response['status'] == 'success') {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text(
-                                        "Selamat! Akun telah berhasil dibuat"),
-                                  ));
-                                } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text(
-                                        "Akun belum terbuat, lengkapi data untuk membuat akun!"),
-                                  ));
-                                }
-                              }),
-                            ))),
+                              child: TextButton(
+                                  child: Text("Login"),
+                                  onPressed: () async {
+                                    final response = await request.login(
+                                        "https://agritara.pythonanywhere.com/registerLogin/login_flutter/",
+                                        {
+                                          'username': username,
+                                          'password': password1,
+                                        });
+                                    if (response['status']) {
+                                      if (!mounted) return;
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(
+                                            "Anda telah berhasil Login."),
+                                      ));
+                                    } else {
+                                      if (!mounted) return;
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(
+                                            "Anda belum berhasil Login."),
+                                      ));
+                                    }
+                                  }),
+                            )),
                         Container(
                           height: 10,
                         ),
