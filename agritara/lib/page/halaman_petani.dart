@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HalamanUtama(),
+      //home: const HalamanUtama(),
     );
   }
 }
@@ -65,7 +65,7 @@ class _StateHalamanPetani extends State<HalamanPetani> {
         drawer: Drawer(
           child: Column(
             children: [
-              ListTile(
+              /*ListTile(
                 title: const Text('Halaman Utama'),
                 onTap: () {
                   Navigator.pushReplacement(
@@ -74,7 +74,7 @@ class _StateHalamanPetani extends State<HalamanPetani> {
                         builder: (context) => const HalamanUtama()),
                   );
                 },
-              ),
+              ),*/
               ListTile(
                 title: const Text('Halaman Petani'),
                 onTap: () {

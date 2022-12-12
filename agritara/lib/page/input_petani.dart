@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HalamanUtama(),
+      //home: const HalamanUtama(),
     );
   }
 }
@@ -36,7 +36,7 @@ class _StateHalamanInputPetani extends State<HalamanInputPetani> {
       drawer: Drawer(
         child: Column(
           children: [
-            ListTile(
+            /*ListTile(
               title: const Text('Halaman Utama'),
               onTap: () {
                 Navigator.pushReplacement(
@@ -44,7 +44,7 @@ class _StateHalamanInputPetani extends State<HalamanInputPetani> {
                   MaterialPageRoute(builder: (context) => const HalamanUtama()),
                 );
               },
-            ),
+            ),*/
             ListTile(
               title: const Text('Halaman Petani'),
               onTap: () {
