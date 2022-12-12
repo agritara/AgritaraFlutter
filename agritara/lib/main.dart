@@ -8,6 +8,14 @@ import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:agritara/starting_page/login.dart';
 import 'package:agritara/starting_page/register.dart';
+import 'dart:convert';
+import 'dart:math';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:agritara/Navbar.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+ 
 
 void main() {
   runApp(const MyApp());
@@ -51,3 +59,109 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key}) : super(key : key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
+    return Scaffold(
+      drawer: Navbar(),
+      appBar: AppBar(
+        title: Text('Agritara'),
+      ),
+      body: Column(
+        children: [
+          FutureBuilder<List<InputPetani>> (
+        future: fetchExistingInputPetaniData(),
+        builder: ((context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            if (!snapshot.hasData) {
+              return Column(
+                children: const [
+                  Text(
+                    'No Data',
+                  )
+                ],
+              );
+            } else {
+              return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (_, index)=> DataTable(
+                        columns: [
+                          DataColumn(label: Text('Asal Provinsi')),
+                          DataColumn(label: Text('Jenis Komoditas')),
+                          DataColumn(label: Text('Jumlah')),
+                          DataColumn(label: Text('Tanggal')),
+                        ],
+                      rows: [
+                            DataRow(
+                              cells: [
+                                DataCell(Text("${snapshot.data![index].fields.daerahAsal}")),
+                                DataCell(Text("${snapshot.data![index].fields.namaBarang}")),
+                                DataCell(Text("${snapshot.data![index].fields.kuantitasBarang}")),
+                                DataCell(Text("${snapshot.data![index].fields.date}")),
+                              ],
+                            ),
+                        ])
+              );         
+      
+            }
+        }
+      }
+    )
+    ),
+    FutureBuilder<List<InputPetani>> (
+        future: fetchExistingInputPetaniData(),
+        builder: ((context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            if (!snapshot.hasData) {
+              return Column(
+                children: const [
+                  Text(
+                    'No Data',
+                  )
+                ],
+              );
+            } else {
+              return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (_, index)=> DataTable(
+                        columns: [
+                          DataColumn(label: Text('Provinsi')),
+                          DataColumn(label: Text('Komoditas')),
+                          DataColumn(label: Text('Jumlah')),
+                        ],
+                      rows: [
+                            DataRow(
+                              cells: [
+                                DataCell(Text("${snapshot.data![index].fields.daerahAsal}")),
+                                DataCell(Text("${snapshot.data![index].fields.namaBarang}")),
+                                DataCell(Text("${snapshot.data![index].fields.kuantitasBarang}")),
+                              ],
+                            ),
+                        ])
+              );         
+      
+            }
+        }
+      }
+    )
+    ),
+        ],
+      )
+    );
+  }
+}
+
