@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HalamanUtama(),
+      //home: const HalamanUtama(),
     );
   }
 }
@@ -44,7 +44,7 @@ class _StateHalamanLogin extends State<HalamanLogin> {
                 );
               },
             ),
-            ListTile(
+            /*ListTile(
               title: const Text('Halaman Utama'),
               onTap: () {
                 Navigator.pushReplacement(
@@ -52,7 +52,7 @@ class _StateHalamanLogin extends State<HalamanLogin> {
                   MaterialPageRoute(builder: (context) => const HalamanUtama()),
                 );
               },
-            ),
+            ),*/
           ],
         ),
       ),
