@@ -31,33 +31,9 @@ class HalamanPetani extends StatefulWidget {
 }
 
 class _StateHalamanPetani extends State<HalamanPetani> {
-  Future<List<ToDo>> fetchToDo() async {
-    var url = Uri.parse(
-        'https://jsonplaceholder.typicode.com/todos?_start=0&_limit=10');
-    var response = await http.get(
-      url,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    );
-
-    // melakukan decode response menjadi bentuk json
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-
-    // melakukan konversi data json menjadi object ToDo
-    List<ToDo> listToDo = [];
-    for (var d in data) {
-      if (d != null) {
-        listToDo.add(ToDo.fromJson(d));
-      }
-    }
-
-    return listToDo;
-  }
-
   Future<List<BarangPetani>> fetchBarangPetani() async {
-    var url = Uri.parse('????????????'); // INI LINK
+    var url =
+        Uri.parse('https://agritara.pythonanywhere.com/tambah/get_barang/');
     var response = await http.get(
       url,
       headers: {
@@ -123,7 +99,7 @@ class _StateHalamanPetani extends State<HalamanPetani> {
           ),
         ),
         body: FutureBuilder(
-            future: fetchToDo(),
+            future: fetchBarangPetani(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
@@ -158,14 +134,21 @@ class _StateHalamanPetani extends State<HalamanPetani> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${snapshot.data![index].title}",
+                                  "${snapshot.data![index].fields.namaBarang}",
                                   style: const TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                Text("${snapshot.data![index].completed}"),
+                                Text(
+                                    "${snapshot.data![index].fields.kuantitasBarang}" +
+                                        " Kg"),
+                                const SizedBox(height: 10),
+                                Text(snapshot.data![index].fields.daerahAsal
+                                    .toString()
+                                    .split('.')
+                                    .last),
                               ],
                             ),
                           ));
