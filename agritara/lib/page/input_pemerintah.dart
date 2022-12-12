@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:agritara/main.dart';
 import 'package:agritara/page/halaman_pemerintah.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
-// Array to contain requests
-var listRequest = [];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,18 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: const HalamanUtama(),
+      home: const HalamanUtama(),
     );
   }
 }
 
-// Object for requests
-class RequestObject {
-  String namaRequest;
-  int kuantitas;
-
-  RequestObject({required this.namaRequest, required this.kuantitas});
-}
 
 class HalamanInputPemerintah extends StatefulWidget {
   const HalamanInputPemerintah({super.key});
@@ -44,6 +37,21 @@ class _StateHalamanInputPemerintah extends State<HalamanInputPemerintah> {
   String _kuantitasString = "";
   int _kuantitasInt = 0;
 
+  postData(String request, String kuantitas) async {
+
+    var response = await http.post(
+      Uri.parse('https://agritara.pythonanywhere.com/permintaan/request/'),
+      // Uri.parse('http://localhost:8000/permintaan/request/'),
+      // body: {
+
+      body: {
+        "request":request,
+        "kuantitas_req":kuantitas,
+      }
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +61,7 @@ class _StateHalamanInputPemerintah extends State<HalamanInputPemerintah> {
       drawer: Drawer(
         child: Column(
           children: [
-            /*ListTile(
+            ListTile(
               title: const Text('Halaman Utama'),
               onTap: () {
                 Navigator.pushReplacement(
@@ -61,7 +69,7 @@ class _StateHalamanInputPemerintah extends State<HalamanInputPemerintah> {
                   MaterialPageRoute(builder: (context) => const HalamanUtama()),
                 );
               },
-            ),*/
+            ),
             ListTile(
               title: const Text('Halaman Pemerintah'),
               onTap: () {
@@ -168,7 +176,7 @@ class _StateHalamanInputPemerintah extends State<HalamanInputPemerintah> {
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return 'Kuantitas tidak boleh kosong!';
-                      } else  if (int.parse(value) == 0) {
+                      } else if (int.parse(value) == 0) {
                         return 'Kuantitas tidak boleh nol!';
                       }
                       return null;
@@ -186,88 +194,67 @@ class _StateHalamanInputPemerintah extends State<HalamanInputPemerintah> {
                   child: const Text('Submit', style: TextStyle(color: Colors.white),),
 
                   onPressed: () {
-                    // if (_formKey.currentState!.validate()) {
-                    //   showDialog(
-                    //     context: context,
-                    //     builder: (context) {
-                          
-                    //       // Dialog box
-                    //       return Dialog(
-                    //         shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(10.0),
-                    //         ),
-
-                    //         elevation: 15,
-                    //         child: Container(
-                    //           child: ListView(),
-                    //         ),
-                    //       );
-                    //     },
-                    //   );
-                    // }
-
                     if (_formKey.currentState!.validate()) {
-
-                    // Creates new request object
-                    RequestObject requestObject = RequestObject(namaRequest: _namaRequest, kuantitas: int.parse(_kuantitasString));
-
-                    // Adds the newly created object to list
-                    listRequest.add(requestObject);
-
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        
-                        // Dialog box
-                        return Dialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-
-                          elevation: 15,
+                      
+                      // Dialog box to show data has been added
+                      showDialog(
+                        context: context,
+                        builder: (context) {
                           
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(5),
-                            width: 400,
-                            height: 200,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  
-                                  child: Text(
-                                          'Data Request berhasil disimpan!',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                ),
-
-                                const SizedBox(height: 20,),
-
-                                TextButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(Colors.blue),
-                                  ),
-                                  child: const Text('Kembali', style: TextStyle(color: Colors.white),),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    print(listRequest);
-                                  },
-                                ),
-                              ],
+                          // Dialog box
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          ),
-                        );
-                      },
-                    );
 
-                    _formKey.currentState!.reset();
+                            elevation: 15,
+                            
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(5),
+                              width: 400,
+                              height: 200,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    
+                                    child: Text(
+                                            'Data Request berhasil disimpan!',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                  ),
+
+                                  const SizedBox(height: 20,),
+
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                                    ),
+                                    child: const Text('Kembali', style: TextStyle(color: Colors.white),),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                        
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+
+                      // Posts data to databse
+                      postData(_namaRequest, _kuantitasString);
+
+                      // Resets form
+                      _formKey.currentState!.reset();
                     }
                   },
                 ),
