@@ -6,6 +6,7 @@ Anggota kelompok:
 5. Bintang Pratama (2106751373)
 6. Fauzan Firzandy Khifzan (2106702756)
 
+Link aplikasi platform : https://agritara.pythonanywhere.com/  
 
 Deskripsi Aplikasi: 
 1. Nama: 
